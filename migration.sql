@@ -62,6 +62,74 @@ CREATE TABLE results (
 INSERT INTO users (username, password, role) VALUES 
 ('admin', 'admin', 'admin');
 
+-- Insert 5 quiz topics
+INSERT INTO quizzes (name, description) VALUES
+('Sports', 'itz olny game y you have to b mad?'),
+('Programmēšana', 'aka kodēšanās'),
+('Spēles', 'itz onļy game'),
+('B', 'b'),
+('C', 'c');
+
+-- Insert questions and answers for Quiz 1: PHP Programming
+INSERT INTO questions (quiz_id, question_text) VALUES
+(1, 'basketola?'),
+(1, 'hoķis?')
+;
+
+-- Answers for PHP Programming questions
+INSERT INTO answers (question_id, answer_text, is_correct) VALUES
+-- Question 1
+(1, 'basketbols', FALSE),
+(1, 'futbols', TRUE)
+;
+
+-- Insert questions for Quiz 2: JavaScript Fundamentals
+INSERT INTO questions (quiz_id, question_text) VALUES
+(2, 'Which keyword is used to declare a variable in JavaScript?'),
+(2, 'What is the output of: typeof null?')
+;
+
+-- Answers for JavaScript Fundamentals
+INSERT INTO answers (question_id, answer_text, is_correct) VALUES
+-- Question 16
+(16, 'var, let, or const', TRUE),
+(16, 'variable', FALSE)
+;
+
+-- Insert questions for Quiz 3: Database Management
+INSERT INTO questions (quiz_id, question_text) VALUES
+(3, 'What does SQL stand for?'),
+(3, 'Which SQL statement is used to retrieve data from a database?')
+;
+
+-- Answers for Database Management
+INSERT INTO answers (question_id, answer_text, is_correct) VALUES
+-- Question 31
+(31, 'Structured Query Language', TRUE),
+(31, 'Simple Query Language', FALSE)
+;
+
+-- Answers for Web Development
+INSERT INTO answers (question_id, answer_text, is_correct) VALUES
+-- Question 46
+(46, 'HyperText Markup Language', TRUE),
+(46, 'High Text Markup Language', FALSE)
+;
+
+
+-- Insert questions for Quiz 5: Object-Oriented Programming
+INSERT INTO questions (quiz_id, question_text) VALUES
+(5, 'What is encapsulation in OOP?'),
+(5, 'What is inheritance?')
+;
+
+-- Answers for Object-Oriented Programming
+INSERT INTO answers (question_id, answer_text, is_correct) VALUES
+-- Question 61
+(61, 'Bundling data and methods that work on that data', TRUE),
+(61, 'Hiding implementation details', FALSE)
+;
+
 -- Success message
 SELECT 'Database migration completed successfully!' as message;
 SELECT 'Default admin user created - Username: admin, Password: admin' as info;

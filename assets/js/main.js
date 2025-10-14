@@ -1,12 +1,3 @@
-/**
- * Clean, reliable Quiz System JavaScript
- * Works with or without JS enabled (progressive enhancement)
- * - Login / Register forms work normally
- * - Quiz logic interactive
- * - Admin tables & filters functional
- */
-
-// ---------- QUIZ MANAGER ----------
 class QuizManager {
   constructor() {
     this.current = 0;

@@ -25,11 +25,11 @@ foreach ($user_history as $result) {
 $average_score = $total_questions > 0 ? round(($total_score / $total_questions) * 100) : 0;
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Quiz System</title>
+    <title>Sākumlapa</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -40,12 +40,15 @@ $average_score = $total_questions > 0 ? round(($total_score / $total_questions) 
             </div>
             <nav>
                 <ul>
-                    <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="history.php">History</a></li>
+                    <li><a href="dashboard.php">Sākumlapa</a></li>
+                    <li><a href="history.php">Iepriekšējās darbības</a></li>
                     <?php if (User::isAdmin()): ?>
-                        <li><a href="admin/index.php">Admin Panel</a></li>
+                        <li><a href="admin/index.php">Admina panelis</a></li>
+                        <li><a href="quizzes.php">Quizzi</a></li>
+                        <li><a href="edit_user.php">rediģē lietotāju</a></li>
+                        <li><a href="eit_answer.php">rediģēt atbildes</a></li>
                     <?php endif; ?>
-                    <li><a href="logout.php">Logout (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a></li>
+                    <li><a href="logout.php">Izlogoties (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a></li>
                 </ul>
             </nav>
         </div>
@@ -54,21 +57,21 @@ $average_score = $total_questions > 0 ? round(($total_score / $total_questions) 
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>! 👋</h2>
+                <h2>Čau, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
             </div>
 
             <!-- Statistics -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-label">Quizzes Taken</div>
+                    <div class="stat-label">Pildīto uzdevumu skaits.</div>
                     <div class="stat-value"><?php echo $total_quizzes_taken; ?></div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Average Score</div>
+                    <div class="stat-label">Vidējais rezultāts</div>
                     <div class="stat-value"><?php echo $average_score; ?>%</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Available Quizzes</div>
+                    <div class="stat-label">Pieejamie quizzi</div>
                     <div class="stat-value"><?php echo count($quizzes); ?></div>
                 </div>
             </div>
@@ -76,14 +79,13 @@ $average_score = $total_questions > 0 ? round(($total_score / $total_questions) 
 
         <div class="card">
             <div class="card-header">
-                <h2>Available Quizzes</h2>
-                <p>Select a quiz to test your knowledge</p>
+                <h2>Pieejamie quizzi</h2>
             </div>
 
             <?php if (empty($quizzes)): ?>
                 <div class="empty-state">
-                    <h3>No quizzes available</h3>
-                    <p>Check back later for new quizzes</p>
+                    <h3>Neviena quizza vēl nav</h3>
+                    <p>Mby izveido pats?</p>
                 </div>
             <?php else: ?>
                 <div class="quiz-grid">
@@ -92,11 +94,11 @@ $average_score = $total_questions > 0 ? round(($total_score / $total_questions) 
                             <h3><?php echo htmlspecialchars($q['name']); ?></h3>
                             <p><?php echo htmlspecialchars($q['description']); ?></p>
                             <div class="quiz-meta">
-                                <span>📝 <?php echo $q['question_count']; ?> Questions</span>
-                                <span>👥 <?php echo $q['times_taken']; ?> Attempts</span>
+                                <span><?php echo $q['question_count']; ?> Jautājumu skatits.</span>
+                                <span><?php echo $q['times_taken']; ?> Pildītie mēģinājumi.</span>
                             </div>
                             <a href="take_quiz.php?id=<?php echo $q['id']; ?>" class="btn btn-primary btn-block">
-                                Start Quiz
+                                SĀKT!1!
                             </a>
                         </div>
                     <?php endforeach; ?>
@@ -125,7 +127,7 @@ $average_score = $total_questions > 0 ? round(($total_score / $total_questions) 
                         </div>
                     </div>
                 <?php endforeach; ?>
-                <a href="history.php" class="btn btn-secondary btn-block mt-3">View Full History</a>
+                <a href="history.php" class="btn btn-secondary btn-block mt-3">Apskatīt visus iepriekšējos rezultātus.</a>
             </div>
         <?php endif; ?>
     </div>

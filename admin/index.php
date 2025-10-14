@@ -38,11 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Quiz System</title>
+    <title>Admina lapa</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -53,10 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <nav>
                 <ul>
-                    <li><a href="../dashboard.php">Dashboard</a></li>
-                    <li><a href="index.php">Users</a></li>
-                    <li><a href="quizzes.php">Quizzes</a></li>
-                    <li><a href="../logout.php">Logout</a></li>
+                    <li><a href="../dashboard.php">Sākumlapa</a></li>
+                    <li><a href="index.php">Lietotāji</a></li>
+                    <li><a href="quizzes.php">Quizzi</a></li>
+                    <li><a href="../logout.php">Izlogoties</a></li>
                 </ul>
             </nav>
         </div>
@@ -72,15 +72,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Statistics -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-label">Total Users</div>
+                <div class="stat-label">Lietotāju skaits.</div>
                 <div class="stat-value"><?php echo $total_users; ?></div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Admin Users</div>
+                <div class="stat-label">Lietotāji ar admina tiesībām</div>
                 <div class="stat-value"><?php echo $total_admins; ?></div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Total Quizzes</div>
+                <div class="stat-label">Quizzu skaits.</div>
                 <div class="stat-value"><?php echo $total_quizzes; ?></div>
             </div>
         </div>
@@ -88,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- User Management -->
         <div class="card">
             <div class="card-header">
-                <h2>User Management</h2>
-                <p>Manage user accounts and permissions</p>
+                <h2>Lietotāju pārvaldība.</h2>
+                <p>Maini lietotāju tiesības un info.</p>
             </div>
 
             <div class="form-group">
@@ -101,10 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Username</th>
+                            <th>Lietotājvārds</th>
                             <th>Role</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
+                            <th>Izveidots:</th>
+                            <th>Darbības</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <td>
                                     <div class="table-actions">
                                         <a href="edit_user.php?id=<?php echo $u['id']; ?>" class="btn btn-sm btn-primary">
-                                            Edit
+                                            Redoģēt lietotāju.
                                         </a>
                                         
                                         <!-- Change Role -->
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <input type="hidden" name="user_id" value="<?php echo $u['id']; ?>">
                                             <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
                                                     onclick="return confirm('Are you sure you want to delete <?php echo htmlspecialchars($u['username']); ?>?')">
-                                                Delete
+                                                Dzēst lietotāju.
                                             </button>
                                         </form>
                                     </div>

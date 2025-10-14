@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz System - Login</title>
+    <title>Ierakstīšanās</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -92,20 +92,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                 <form method="POST" action="index.php" novalidate>
 
                     <div class="form-group">
-                        <label for="login-username">Username</label>
+                        <label for="login-username">Lietotājvārds</label>
                         <input type="text" id="login-username" name="username" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="login-password">Password</label>
+                        <label for="login-password">Parole</label>
                         <input type="text" id="login-password" name="password" class="form-control" required>
                     </div>
 
-                    <button type="submit" name="login" class="btn btn-primary btn-block">Login</button>
+                    <button type="submit" name="login" class="btn btn-primary btn-block">Ierakstīties</button>
                 </form>
 
                 <div class="auth-toggle">
-                    <p>Don't have an account? <a href="javascript:void(0);" onclick="toggleForms();">Register here</a></p>
+                    <p>Vai vēl nēsi reģistrējies? <a href="javascript:void(0);" onclick="toggleForms();">Reģistrēties</a></p>
                 </div>
             </div>
 
@@ -114,26 +114,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                 <form method="POST" action="index.php" novalidate>
 
                     <div class="form-group">
-                        <label for="register-username">Username</label>
+                        <label for="register-username">Lietotājvārds</label>
                         <input type="text" id="register-username" name="username" class="form-control" required 
                                value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
                     </div>
 
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">Parole</label>
                         <input type="text" id="password" name="password" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="confirm-password">Confirm Password</label>
+                        <label for="confirm-password">Apstiprini paroli</label>
                         <input type="text" id="confirm-password" name="confirm_password" class="form-control" required>
                     </div>
 
-                    <button type="submit" name="register" class="btn btn-primary btn-block">Register</button>
+                    <button type="submit" name="register" class="btn btn-primary btn-block">Reģistrēties</button>
                 </form>
 
                 <div class="auth-toggle">
-                    <p>Already have an account? <a href="#" onclick="toggleForms(); return false;">Login here</a></p>
+                    <p>Mby tev tomēr ir jau ir lietotājprfils? <a href="#" onclick="toggleForms(); return false;">Ielogoties</a></p>
                 </div>
             </div>
         </div>

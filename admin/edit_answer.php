@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Answer - Admin Panel</title>
+    <title>Rediģēt adbildes</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -62,10 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <nav>
                 <ul>
-                    <li><a href="../dashboard.php">Dashboard</a></li>
-                    <li><a href="index.php">Users</a></li>
-                    <li><a href="quizzes.php">Quizzes</a></li>
-                    <li><a href="../logout.php">Logout</a></li>
+                    <li><a href="../dashboard.php">Sākumlapa</a></li>
+                    <li><a href="index.php">Lietotāji</a></li>
+                    <li><a href="quizzes.php">Quizzi</a></li>
+                    <li><a href="../logout.php">Izlogoties</a></li>
                 </ul>
             </nav>
         </div>

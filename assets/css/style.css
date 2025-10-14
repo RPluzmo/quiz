@@ -51,7 +51,7 @@ header {
 }
 
 .logo h1 {
-    color: var(--primary-color);
+    color: var(--danger-color);
     font-size: 1.8rem;
 }
 

@@ -19,7 +19,7 @@ $quizzes = $quiz->getAllQuizzes();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz History - Quiz System</title>
+    <title>Iepriekšējās darbības</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -30,12 +30,12 @@ $quizzes = $quiz->getAllQuizzes();
             </div>
             <nav>
                 <ul>
-                    <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="history.php">History</a></li>
+                    <li><a href="dashboard.php">Sākumlapa</a></li>
+                    <li><a href="history.php">Iepriekšējās darbības</a></li>
                     <?php if (User::isAdmin()): ?>
-                        <li><a href="admin/index.php">Admin Panel</a></li>
+                        <li><a href="admin/index.php">l</a></li>
                     <?php endif; ?>
-                    <li><a href="logout.php">Logout</a></li>
+                    <li><a href="logout.php">Izlogoties (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a></li>
                 </ul>
             </nav>
         </div>
@@ -44,15 +44,13 @@ $quizzes = $quiz->getAllQuizzes();
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h2>Quiz History & High Scores 🏆</h2>
-                <p>View your past quiz attempts and scores</p>
+                <h2>Sasniegumi</h2>
             </div>
 
             <?php if (empty($history)): ?>
                 <div class="empty-state">
-                    <h3>No quiz history yet</h3>
-                    <p>Take a quiz to see your results here</p>
-                    <a href="dashboard.php" class="btn btn-primary mt-3">Browse Quizzes</a>
+                    <h3>Neviens quizz nav spēlēts.</h3>
+                    <a href="dashboard.php" class="btn btn-primary mt-3">Pildīt quizu</a>
                 </div>
             <?php else: ?>
                 <!-- Filters -->
@@ -60,17 +58,17 @@ $quizzes = $quiz->getAllQuizzes();
                     <div class="form-group" style="margin-bottom: 0;">
                         <label for="quiz-filter">Filter by Quiz:</label>
                         <select id="quiz-filter" class="form-control" onchange="filterHistory(this.value)" style="width: auto; display: inline-block; margin-left: 0.5rem;">
-                            <option value="all">All Quizzes</option>
+                            <option value="all">Visi quizzi</option>
                             <?php foreach ($quizzes as $q): ?>
                                 <option value="<?php echo $q['id']; ?>"><?php echo htmlspecialchars($q['name']); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label for="sort-by">Sort by:</label>
+                        <label for="sort-by">Kārtot pēc:</label>
                         <select id="sort-by" class="form-control" onchange="sortHistory(this.value)" style="width: auto; display: inline-block; margin-left: 0.5rem;">
-                            <option value="date">Date (Newest First)</option>
-                            <option value="score">Score (Highest First)</option>
+                            <option value="date">Datuma</option>
+                            <option value="score">Rezultāta</option>
                         </select>
                     </div>
                 </div>
@@ -89,7 +87,7 @@ $quizzes = $quiz->getAllQuizzes();
                                 <h4><?php echo htmlspecialchars($result['quiz_name']); ?></h4>
                                 <p><?php echo htmlspecialchars($result['description']); ?></p>
                                 <p style="font-size: 0.875rem; color: var(--light-text);">
-                                    📅 <?php echo date('F j, Y g:i A', strtotime($result['completed_at'])); ?>
+                                     <?php echo date('F j, Y g:i A', strtotime($result['completed_at'])); ?>
                                 </p>
                             </div>
                             <div class="history-score">
@@ -110,10 +108,10 @@ $quizzes = $quiz->getAllQuizzes();
                     <h3>Your Statistics</h3>
                     <div class="stats-grid">
                         <div>
-                            <strong>Total Quizzes Taken:</strong> <?php echo count($history); ?>
+                            <strong>Quizi pildī:</strontg> <?php echo count($history); ?>
                         </div>
                         <div>
-                            <strong>Average Score:</strong> 
+                            <strong>Vidējais rezultās:</strong> 
                             <?php 
                             $total_score = 0;
                             $total_questions = 0;
