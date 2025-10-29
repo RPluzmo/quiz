@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Management - Admin Panel</title>
+    <title>Jautājumu pārvaldnieks</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -66,35 +66,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Create New Quiz -->
         <div class="card">
             <div class="card-header">
-                <h2>Create New Quiz</h2>
+                <h2>Veido jaunu testu</h2>
             </div>
 
             <form method="POST" action="">
                 <div class="form-group">
-                    <label for="name">Quiz Name</label>
+                    <label for="name">Testa nosaukums</label>
                     <input type="text" id="name" name="name" class="form-control" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description</label>
+                    <label for="description">Apraksts</label>
                     <textarea id="description" name="description" class="form-control" rows="3" required></textarea>
                 </div>
 
-                <button type="submit" name="create_quiz" class="btn btn-success">Create Quiz</button>
+                <button type="submit" name="create_quiz" class="btn btn-success">Veidot jaunu testu</button>
             </form>
         </div>
 
         <!-- Quiz List -->
         <div class="card">
             <div class="card-header">
-                <h2>Manage Quizzes</h2>
-                <p>Edit quizzes, questions, and answers</p>
+                <h2>Pārvaldīt testus</h2>
             </div>
 
             <?php if (empty($quizzes)): ?>
                 <div class="empty-state">
-                    <h3>No quizzes yet</h3>
-                    <p>Create your first quiz above</p>
+                    <h3>Neviena testa nav</h3>
                 </div>
             <?php else: ?>
                 <div style="overflow-x: auto;">
@@ -102,11 +100,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Questions</th>
-                                <th>Times Taken</th>
-                                <th>Actions</th>
+                                <th>Tēma</th>
+                                <th>Apraksts</th>
+                                <th>Jautājumi</th>
+                                <th>Reizes pildīts</th>
+                                <th>Darbības</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -120,16 +118,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <td>
                                         <div class="table-actions">
                                             <a href="edit_quiz.php?id=<?php echo $q['id']; ?>" class="btn btn-sm btn-primary">
-                                                Edit
+                                                Rediģēt
                                             </a>
                                             <a href="manage_questions.php?quiz_id=<?php echo $q['id']; ?>" class="btn btn-sm btn-warning">
-                                                Questions
+                                                Jautājumi
                                             </a>
                                             <form method="POST" style="display: inline;">
                                                 <input type="hidden" name="quiz_id" value="<?php echo $q['id']; ?>">
                                                 <button type="submit" name="delete_quiz" class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Delete quiz: <?php echo htmlspecialchars($q['name']); ?>?')">
-                                                    Delete
+                                                    Dzēst
                                                 </button>
                                             </form>
                                         </div>

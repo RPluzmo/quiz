@@ -1,6 +1,9 @@
 <?php
 require_once '../config/config.php';
 
+$message = $_GET['msg'] ?? '';
+$message_type = $_GET['type'] ?? '';
+
 // Require admin access
 User::requireAdmin();
 
@@ -38,14 +41,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $quiz_obj->createAnswer($question_id, $_POST['answer_text'], $is_correct);
         $message = $result['message'];
         $message_type = $result['success'] ? 'success' : 'danger';
-        // Refresh answers
-        $answers = $quiz_obj->getQuestionAnswers($question_id, false);
+
+        // ✅ Redirect after POST
+        header("Location: manage_answers.php?question_id={$question_id}&quiz_id={$quiz_id}&msg=" . urlencode($message) . "&type={$message_type}");
+        exit;
     } elseif (isset($_POST['delete_answer'])) {
         $result = $quiz_obj->deleteAnswer($_POST['answer_id']);
         $message = $result['message'];
         $message_type = $result['success'] ? 'success' : 'danger';
-        // Refresh answers
-        $answers = $quiz_obj->getQuestionAnswers($question_id, false);
+
+        // ✅ Redirect again
+        header("Location: manage_answers.php?question_id={$question_id}&quiz_id={$quiz_id}&msg=" . urlencode($message) . "&type={$message_type}");
+        exit;
     }
 }
 ?>
@@ -54,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Answers - Admin Panel</title>
+    <title>Pārvaldīt atbildes</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -67,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <ul>
                     <li><a href="../dashboard.php">Sākumlapa</a></li>
                     <li><a href="index.php">Lietotāji</a></li>
-                    <li><a href="quizzes.php">Quizzi</a></li>
+                    <li><a href="quizzes.php">Testi</a></li>
                     <li><a href="../logout.php">Izlogoties</a></li>
                 </ul>
             </nav>
@@ -83,44 +90,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="card">
             <div class="card-header">
-                <h2>Manage Answers</h2>
-                <p><strong>Question:</strong> <?php echo htmlspecialchars($question['question_text']); ?></p>
+                <h2>Pārvaldīt atzīmes</h2>
+                <p><strong>Jautājums:</strong> <?php echo htmlspecialchars($question['question_text']); ?></p>
             </div>
 
-            <a href="manage_questions.php?quiz_id=<?php echo $quiz_id; ?>" class="btn btn-secondary mb-3">← Back to Questions</a>
+            <a href="manage_questions.php?quiz_id=<?php echo $quiz_id; ?>" class="btn btn-secondary mb-3"><-- Atgriesties pie jautājumiem</a>
 
             <!-- Create New Answer -->
             <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
-                <h3>Add New Answer</h3>
+                <h3>Pievienot jaunu atbildi</h3>
                 <form method="POST" action="">
                     <div class="form-group">
-                        <label for="answer_text">Answer Text</label>
+                        <label for="answer_text">Atbilde</label>
                         <textarea id="answer_text" name="answer_text" class="form-control" rows="2" required></textarea>
                     </div>
                     <div class="form-group">
                         <label>
                             <input type="checkbox" name="is_correct" value="1">
-                            This is the correct answer
+                            Šī būs pareizā atbilde.
                         </label>
                     </div>
-                    <button type="submit" name="create_answer" class="btn btn-success">Add Answer</button>
+                    <button type="submit" name="create_answer" class="btn btn-success">Pievienot atbildi</button>
                 </form>
             </div>
 
             <!-- Answers List -->
             <?php if (empty($answers)): ?>
                 <div class="empty-state">
-                    <h3>No answers yet</h3>
-                    <p>Add your first answer above</p>
+                    <h3>Nevienas atbildes nav</h3>
                 </div>
             <?php else: ?>
                 <div style="overflow-x: auto;">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Answer Text</th>
-                                <th>Correct</th>
-                                <th>Actions</th>
+                                <th>Atbilde</th>
+                                <th>✅Pareizi✅</th>
+                                <th>Darbības</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,20 +135,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <td><?php echo htmlspecialchars($answer['answer_text']); ?></td>
                                     <td>
                                         <?php if ($answer['is_correct']): ?>
-                                            <span class="badge badge-admin">✓ Correct</span>
+                                            <span class="badge badge-admin"> Šī ir pareizā atbilde</span>
                                         <?php else: ?>
-                                            <span class="badge badge-user">Incorrect</span>
+                                            <span class="badge badge-user"></span>
                                         <?php endif; ?>
                                     </td>
                                     <td>
                                         <div class="table-actions">
                                             <a href="edit_answer.php?id=<?php echo $answer['id']; ?>&quiz_id=<?php echo $quiz_id; ?>" 
-                                               class="btn btn-sm btn-primary">Edit</a>
+                                               class="btn btn-sm btn-primary">Rediģēt</a>
                                             <form method="POST" style="display: inline;">
                                                 <input type="hidden" name="answer_id" value="<?php echo $answer['id']; ?>">
                                                 <button type="submit" name="delete_answer" class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Delete this answer?')">
-                                                    Delete
+                                                    Dzēsti
                                                 </button>
                                             </form>
                                         </div>
