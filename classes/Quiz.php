@@ -193,14 +193,14 @@ class Quiz {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Quiz created successfully',
+                'message' => 'Jauns tests veiksmīgi izveidots.',
                 'quiz_id' => $this->conn->lastInsertId()
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to create quiz'
+            'message' => 'Neizdevās izveidot testu.. my bad;['
         ];
     }
 
@@ -220,13 +220,13 @@ class Quiz {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Quiz updated successfully'
+                'message' => 'Tests atjaunināts'
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to update quiz'
+            'message' => 'Neizdevās atjaunināt testu'
         ];
     }
 
@@ -241,13 +241,13 @@ class Quiz {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Quiz deleted successfully'
+                'message' => 'Tests veiksmīgi izdzēsts'
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to delete quiz'
+            'message' => 'Neizdevās izdzēst testu'
         ];
     }
 
@@ -266,14 +266,14 @@ class Quiz {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Question created successfully',
+                'message' => 'Jautājums pievienots',
                 'question_id' => $this->conn->lastInsertId()
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to create question'
+            'message' => 'Neizdevās pievienot jautājumu'
         ];
     }
 
@@ -292,13 +292,13 @@ class Quiz {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Question updated successfully'
+                'message' => 'Jautājums atjaunināts'
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to update question'
+            'message' => 'Neizdevās atjaunināt jautājumu'
         ];
     }
 
@@ -313,13 +313,13 @@ class Quiz {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Question deleted successfully'
+                'message' => 'Jautājums dzēsts'
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to delete question'
+            'message' => 'Neizdevās dzēst jautājumu'
         ];
     }
 
@@ -339,14 +339,14 @@ class Quiz {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Answer created successfully',
+                'message' => 'Atbilde ir izveidota',
                 'answer_id' => $this->conn->lastInsertId()
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to create answer'
+            'message' => 'Neizdevās izveidot atbildi'
         ];
     }
 
@@ -366,13 +366,13 @@ class Quiz {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Answer updated successfully'
+                'message' => 'Atbilde ir atjaunota'
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to update answer'
+            'message' => 'Neizdevās atjaunot atbildi'
         ];
     }
 
@@ -387,13 +387,13 @@ class Quiz {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Answer deleted successfully'
+                'message' => 'Atbilde ir dzēsta'
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to delete answer'
+            'message' => 'Neizdevās dzēst atbildi'
         ];
     }
 

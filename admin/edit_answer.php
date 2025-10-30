@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,14 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header>
         <div class="header-content">
             <div class="logo">
-                <h1>Admin</h1>
+                <h1></h1>
             </div>
             <nav>
                 <ul>
                     <li><a href="../dashboard.php">Sākumlapa</a></li>
                     <li><a href="index.php">Lietotāji</a></li>
-                    <li><a href="quizzes.php">Quizzi</a></li>
-                    <li><a href="../logout.php">Izlogoties</a></li>
+                    <li><a href="../logout.php">Izrakstīties</a></li>
                 </ul>
             </nav>
         </div>
@@ -74,8 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <div class="card" style="max-width: 600px; margin: 0 auto;">
             <div class="card-header">
-                <h2>Edit Answer</h2>
-                <p><strong>Question:</strong> <?php echo htmlspecialchars($question['question_text']); ?></p>
+                <h2>Rediģēt atbildi</h2>
+                <p><strong>Jautājums:</strong> <?php echo htmlspecialchars($question['question_text']); ?></p>
             </div>
 
             <?php if ($message): ?>
@@ -86,21 +85,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <form method="POST" action="">
                 <div class="form-group">
-                    <label for="answer_text">Answer Text</label>
+                    <label for="answer_text">Atbilde ir</label>
                     <textarea id="answer_text" name="answer_text" class="form-control" rows="3" required><?php echo htmlspecialchars($answer['answer_text']); ?></textarea>
                 </div>
 
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="is_correct" value="1" <?php echo $answer['is_correct'] ? 'checked' : ''; ?>>
-                        This is the correct answer
+                        Šī ir pareizā atbilde
                     </label>
                 </div>
 
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Update Answer</button>
+                    <button type="submit" class="btn btn-primary">Atjaunot atbildi</button>
                     <a href="manage_answers.php?question_id=<?php echo $answer['question_id']; ?>&quiz_id=<?php echo $quiz_id; ?>" 
-                       class="btn btn-secondary">Back</a>
+                       class="btn btn-secondary">Atpakaļ</a>
                 </div>
             </form>
         </div>

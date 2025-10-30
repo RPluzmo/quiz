@@ -25,7 +25,7 @@ class Database {
                 ]
             );
         } catch (PDOException $e) {
-            die("Database Connection Error: " . $e->getMessage());
+            die("DB TEVI NĒĒĒGRIB " . $e->getMessage());
         }
 
         return $this->conn;

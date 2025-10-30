@@ -20,7 +20,7 @@ class QuizManager {
 
     let html = `
       <div class="question-text">
-        <strong>Question ${this.current + 1} of ${this.questions.length}</strong>
+        <strong>${this.current + 1}. jautājums no ${this.questions.length}</strong>
         <p>${q.text}</p>
       </div>
       <ul class="answers-list">
@@ -108,7 +108,7 @@ class QuizManager {
 
     if (answered < total) {
       const proceed = confirm(
-        `You have ${total - answered} unanswered question(s). Submit anyway?`
+        `Jūs nēsat atbildējis uz ${total - answered} jautājumiem.. Vai iesniegt?`
       );
       if (!proceed) return;
     }
@@ -126,7 +126,7 @@ const quizManager = new QuizManager();
 
 // ---------- PAGE INITIALIZATION ----------
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("JS loaded ✓");
+  console.log("jankas skripts itkaa straadaa");
 
   // QUIZ card click → open quiz
   document.querySelectorAll(".quiz-card").forEach((card) => {
@@ -169,11 +169,11 @@ document.addEventListener("DOMContentLoaded", () => {
     pw.addEventListener("input", () => {
       const val = pw.value;
       const errors = [];
-      if (val.length < 9) errors.push("at least 9 characters");
-      if (!/[A-Z]/.test(val)) errors.push("one uppercase letter");
-      if (!/[a-z]/.test(val)) errors.push("one lowercase letter");
-      if (!/[0-9]/.test(val)) errors.push("one number");
-      if (!/[^A-Za-z0-9]/.test(val)) errors.push("one special symbol");
+      if (val.length < 9) errors.push("Parolei jāsastāv vismaz no 9 simboliem, to skaitā:");
+      if (!/[A-Z]/.test(val)) errors.push("vismaz 1 DRUKĀTAIS burts");
+      if (!/[a-z]/.test(val)) errors.push("Vismaz 1 parastais burts");
+      if (!/[0-9]/.test(val)) errors.push("vismaz viens skaitlis");
+      if (!/[^A-Za-z0-9]/.test(val)) errors.push("vismaz 1 simbols");
       if (errors.length)
         feedback.innerHTML =
           "<ul style='color:#e74c3c'>" +
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "</ul>";
       else
         feedback.innerHTML =
-          "<p style='color:#27ae60'>✓ Password is strong</p>";
+          "<p style='color:#27ae60'>Parole atbilst</p>";
     });
   }
 
@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutLink = document.querySelector('a[href="logout.php"]');
   if (logoutLink) {
     logoutLink.addEventListener("click", (e) => {
-      if (!confirm("Log out?")) e.preventDefault();
+      if (!confirm("Vai izrakstīties?")) e.preventDefault();
     });
   }
 });

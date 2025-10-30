@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <li><a href="../dashboard.php">Sākumlapa</a></li>
                     <li><a href="index.php">Lietotāji</a></li>
                     <li><a href="quizzes.php">Testi</a></li>
-                    <li><a href="../logout.php">Izlogoties</a></li>
+                    <li><a href="../logout.php">Izrakstīties</a></li>
                 </ul>
             </nav>
         </div>

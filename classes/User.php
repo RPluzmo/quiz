@@ -29,7 +29,7 @@ class User {
         if ($this->usernameExists()) {
             return [
                 'success' => false,
-                'message' => 'Username already exists'
+                'message' => 'O oo.. lietotājvārds jau ir aizņemts'
             ];
         }
 
@@ -49,13 +49,13 @@ class User {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Registration successful'
+                'message' => 'Reģistrācija izdevās'
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Registration failed'
+            'message' => 'Reģistrācija NEizdevās'
         ];
     }
 
@@ -100,7 +100,7 @@ class User {
 
         return [
             'success' => false,
-            'message' => 'Invalid username or password'
+            'message' => 'Neatbilstošs lietotājvārds vai parole'
         ];
     }
 
@@ -165,7 +165,7 @@ class User {
         if ($stmt->rowCount() > 0) {
             return [
                 'success' => false,
-                'message' => 'Username already exists'
+                'message' => 'O oo.. Lietotājvārds jau ir aizņemts.'
             ];
         }
 
@@ -182,13 +182,13 @@ class User {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'User updated successfully'
+                'message' => 'Lietotājs atjaunināts'
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to update user'
+            'message' => 'Kautkā nesanāca atjaunot lietotāju..'
         ];
     }
 
@@ -200,7 +200,7 @@ class User {
         if ($this->isLastAdmin($id)) {
             return [
                 'success' => false,
-                'message' => 'Cannot delete the last admin user'
+                'message' => 'Nedrīkst noņemt Admin statusu pēdējam tā lietotājam, atdod to kādam citam un mēģini vēlreiz'
             ];
         }
 
@@ -211,13 +211,13 @@ class User {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'User deleted successfully'
+                'message' => 'Lietotājs izdzēsts'
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to delete user'
+            'message' => 'Neizdevās izdzēst'
         ];
     }
 
@@ -233,7 +233,7 @@ class User {
             if ($this->isLastAdmin($id)) {
                 return [
                     'success' => false,
-                    'message' => 'Cannot remove admin privileges from the last admin'
+                    'message' => 'Nedrīkst noņemt Admin statusu pēdējam tā lietotājam, atdod to kādam citam un mēģini vēlreiz'
                 ];
             }
         }
@@ -249,13 +249,13 @@ class User {
         if ($stmt->execute()) {
             return [
                 'success' => true,
-                'message' => 'Role changed successfully'
+                'message' => 'Lietotāja status jeb tiesības nomainītas'
             ];
         }
 
         return [
             'success' => false,
-            'message' => 'Failed to change role'
+            'message' => 'Neizdevās nomainīt lietotāja statusu'
         ];
     }
 

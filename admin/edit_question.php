@@ -43,11 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Question - Admin Panel</title>
+    <title>Rediģēt jautājumus</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -60,8 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <ul>
                     <li><a href="../dashboard.php">Sākumlapa</a></li>
                     <li><a href="index.php">Lietotāji</a></li>
-                    <li><a href="quizzes.php">Quizzi</a></li>
-                    <li><a href="../logout.php">Izlogoties</a></li>
+                    <li><a href="../logout.php">Izrakstīties</a></li>
                 </ul>
             </nav>
         </div>
@@ -70,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <div class="card" style="max-width: 600px; margin: 0 auto;">
             <div class="card-header">
-                <h2>Edit Question</h2>
+                <h2>Rediģēt jautājumus</h2>
             </div>
 
             <?php if ($message): ?>
@@ -81,14 +80,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <form method="POST" action="">
                 <div class="form-group">
-                    <label for="question_text">Question Text</label>
+                    <label for="question_text">Jautājums</label>
                     <textarea id="question_text" name="question_text" class="form-control" rows="4" required><?php echo htmlspecialchars($question['question_text']); ?></textarea>
                 </div>
 
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Update Question</button>
+                    <button type="submit" class="btn btn-primary">Atjaunot jautājumu</button>
                     <a href="manage_answers.php?question_id=<?php echo $question_id; ?>&quiz_id=<?php echo $quiz_id; ?>" 
-                       class="btn btn-warning">Manage Answers</a>
+                       class="btn btn-warning">Pārvaldīt atbildes</a>
                     <a href="manage_questions.php?quiz_id=<?php echo $quiz_id; ?>" class="btn btn-secondary">Back</a>
                 </div>
             </form>

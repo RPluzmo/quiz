@@ -54,9 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <nav>
                 <ul>
                     <li><a href="../dashboard.php">Sākumlapa</a></li>
-                    <li><a href="index.php">Lietotāji</a></li>
-                    <li><a href="quizzes.php">Quizzi</a></li>
-                    <li><a href="../logout.php">Izlogoties</a></li>
+                    <li><a href="quizzes.php">Testi</a></li>
+                    <li><a href="../logout.php">Izrakstīties</a></li>
                 </ul>
             </nav>
         </div>
@@ -80,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="stat-value"><?php echo $total_admins; ?></div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Quizzu skaits.</div>
+                <div class="stat-label">Testu skaits.</div>
                 <div class="stat-value"><?php echo $total_quizzes; ?></div>
             </div>
         </div>
@@ -93,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-group">
-                <input type="text" id="user-search" class="form-control" placeholder="Search users...">
+                <input type="text" id="user-search" class="form-control" placeholder="Meklē lietotājus..">
             </div>
 
             <div style="overflow-x: auto;">
@@ -102,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <tr>
                             <th>ID</th>
                             <th>Lietotājvārds</th>
-                            <th>Role</th>
+                            <th>Tiesības</th>
                             <th>Izveidots:</th>
                             <th>Darbības</th>
                         </tr>
@@ -129,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <input type="hidden" name="user_id" value="<?php echo $u['id']; ?>">
                                             <input type="hidden" name="new_role" value="<?php echo $u['role'] === 'admin' ? 'user' : 'admin'; ?>">
                                             <button type="submit" name="change_role" class="btn btn-sm btn-warning"
-                                                    onclick="return confirm('Change role for <?php echo htmlspecialchars($u['username']); ?>?')">
+                                                    onclick="return confirm('Mainīt tiesības <?php echo htmlspecialchars($u['username']); ?>?')">
                                                 <?php echo $u['role'] === 'admin' ? '→ User' : '→ Admin'; ?>
                                             </button>
                                         </form>
@@ -138,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <form method="POST" style="display: inline;">
                                             <input type="hidden" name="user_id" value="<?php echo $u['id']; ?>">
                                             <button type="submit" name="delete_user" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Are you sure you want to delete <?php echo htmlspecialchars($u['username']); ?>?')">
+                                                    onclick="return confirm('Vai tiešām vēlaties izdzēst lietotāju <?php echo htmlspecialchars($u['username']); ?>?')">
                                                 Dzēst lietotāju.
                                             </button>
                                         </form>

@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             $error = $result['message'];
         }
     } else {
-        $error = 'Database connection failed';
+        $error = 'DB TEVI NĒĒĒGRIB';
     }
 }
 
@@ -48,23 +48,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
         // Check if passwords match
         if ($user->password !== $confirm_password) {
-            $error = 'Passwords do not match';
+            $error = 'Paroles nesakrīt, mby tev CAPS ieslēgts?? idk';
         } else {
             $result = $user->register();
             
             if ($result['success']) {
-                $success = $result['message'] . '. You can now login.';
+                $success = $result['message'] . '. Tagad jūst droši varat ielogoties.';
             } else {
                 $error = $result['message'];
             }
         }
     } else {
-        $error = 'Database connection failed';
+        $error = 'DB TEVI NĒĒĒGRIB';
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                 </form>
 
                 <div class="auth-toggle">
-                    <p>Mby tev tomēr ir jau ir lietotājprfils? <a href="#" onclick="toggleForms(); return false;">Ielogoties</a></p>
+                    <p>Mby tev tomēr jau ir lietotājvārds? <a href="#" onclick="toggleForms(); return false;">Ielogoties</a></p>
                 </div>
             </div>
         </div>

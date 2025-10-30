@@ -43,10 +43,7 @@ $average_score = $total_questions > 0 ? round(($total_score / $total_questions) 
                     <li><a href="dashboard.php">Sākumlapa</a></li>
                     <li><a href="history.php">Iepriekšējās darbības</a></li>
                     <?php if (User::isAdmin()): ?>
-                        <li><a href="admin/index.php">Admina panelis</a></li>
-                        <li><a href="quizzes.php">Quizzi</a></li>
-                        <li><a href="edit_user.php">rediģē lietotāju</a></li>
-                        <li><a href="eit_answer.php">rediģēt atbildes</a></li>
+                        <li><a href="admin/index.php">Admina opcijas</a></li>
                     <?php endif; ?>
                     <li><a href="logout.php">Izlogoties (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a></li>
                 </ul>
@@ -63,7 +60,7 @@ $average_score = $total_questions > 0 ? round(($total_score / $total_questions) 
             <!-- Statistics -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-label">Pildīto uzdevumu skaits.</div>
+                    <div class="stat-label">Pildīto testu skaits.</div>
                     <div class="stat-value"><?php echo $total_quizzes_taken; ?></div>
                 </div>
                 <div class="stat-card">
@@ -71,7 +68,7 @@ $average_score = $total_questions > 0 ? round(($total_score / $total_questions) 
                     <div class="stat-value"><?php echo $average_score; ?>%</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Pieejamie quizzi</div>
+                    <div class="stat-label">Pieejamie testi</div>
                     <div class="stat-value"><?php echo count($quizzes); ?></div>
                 </div>
             </div>
@@ -79,12 +76,12 @@ $average_score = $total_questions > 0 ? round(($total_score / $total_questions) 
 
         <div class="card">
             <div class="card-header">
-                <h2>Pieejamie quizzi</h2>
+                <h2>Pieejamie testi</h2>
             </div>
 
             <?php if (empty($quizzes)): ?>
                 <div class="empty-state">
-                    <h3>Neviena quizza vēl nav</h3>
+                    <h3>Neviena testa vēl nav</h3>
                     <p>Mby izveido pats?</p>
                 </div>
             <?php else: ?>
@@ -109,7 +106,7 @@ $average_score = $total_questions > 0 ? round(($total_score / $total_questions) 
         <?php if (!empty($user_history)): ?>
             <div class="card">
                 <div class="card-header">
-                    <h2>Recent Activity</h2>
+                    <h2>Iepriekšējās darbības</h2>
                 </div>
                 <?php 
                 $recent_history = array_slice($user_history, 0, 5);

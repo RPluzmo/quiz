@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,8 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <ul>
                     <li><a href="../dashboard.php">Sākumlapa</a></li>
                     <li><a href="index.php">Lietotāji</a></li>
-                    <li><a href="quizzes.php">Quizzi</a></li>
-                    <li><a href="../logout.php">Izlogoties</a></li>
+                    <li><a href="../logout.php">Izrakstīties</a></li>
                 </ul>
             </nav>
         </div>
@@ -126,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <form method="POST" style="display: inline;">
                                                 <input type="hidden" name="quiz_id" value="<?php echo $q['id']; ?>">
                                                 <button type="submit" name="delete_quiz" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Delete quiz: <?php echo htmlspecialchars($q['name']); ?>?')">
+                                                        onclick="return confirm('Dzēst testu: <?php echo htmlspecialchars($q['name']); ?>?')">
                                                     Dzēst
                                                 </button>
                                             </form>
