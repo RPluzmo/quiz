@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="form-group">
                     <label for="description">Apraksts</label>
-                    <textarea id="description" name="description" class="form-control" rows="3" required></textarea>
+                    <textarea id="description" name="description" class="form-control" rows="3"></textarea>
                 </div>
 
                 <button type="submit" name="create_quiz" class="btn btn-success">Veidot jaunu testu</button>

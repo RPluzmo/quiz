@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="form-group">
                     <label for="description">Apraksts</label>
-                    <textarea id="description" name="description" class="form-control" rows="4" required><?php echo htmlspecialchars($quiz['description']); ?></textarea>
+                    <textarea id="description" name="description" class="form-control" rows="4" ><?php echo htmlspecialchars($quiz['description']); ?></textarea>
                 </div>
 
                 <div class="form-group">

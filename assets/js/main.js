@@ -82,8 +82,8 @@ class QuizManager {
     const prev = document.getElementById("prev-btn");
     const next = document.getElementById("next-btn");
     const submit = document.getElementById("submit-btn");
-    const qid = this.questions[this.current]?.id;
-    const answered = this.answers[qid] !== undefined;
+    // const qid = this.questions[this.current]?.id;
+    // const answered = this.answers[qid] !== undefined; // <--- Vairs netiek izmantots obligātai validācijai
 
     if (prev) prev.disabled = this.current === 0;
     if (next && submit) {
@@ -92,9 +92,9 @@ class QuizManager {
       next.style.display = last ? "none" : "inline-block";
       submit.style.display = last ? "inline-block" : "none";
       
-      // Buttons are only enabled if an answer is selected
-      next.disabled = !answered;
-      submit.disabled = !answered;
+      // *** GALVENAIS LABOJUMS ŠEIT: Pogas tagad ir vienmēr aktīvas ***
+      next.disabled = false;    // Atļauj doties uz nākamo, pat ja nav atbildes
+      submit.disabled = false;  // Atļauj iesniegt testu, pat ja nav pēdējā atbilde
     }
   }
 

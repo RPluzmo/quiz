@@ -1,4 +1,4 @@
-/* Quiz System Styles - UZLABOTA VERSIJA */
+/* Quiz System Styles */
 
 * {
     margin: 0;
@@ -7,37 +7,36 @@
 }
 
 :root {
-    /* JAUNA KRĀSU PALETE */
-    --primary-color: #007bff; /* Spilgti zils/akcents */
-    --secondary-color: #495057; /* Tumšākam tekstam/virakursam */
-    --success-color: #28a745; /* Zaļš panākumiem */
-    --danger-color: #dc3545; /* Sarkans kļūdām/bīstamām darbībām */
-    --warning-color: #ffc107; /* Dzeltens brīdinājumiem */
-    --light-bg: #f8f9fa; /* Ļoti gaišs fons */
-    --dark-text: #212529; /* Pamata teksta krāsa */
-    --light-text: #6c757d; /* Vieglāks/sekundārs teksts */
-    --border-color: #dee2e6;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Maigāka ēna */
+    --primary-color: #75757a;
+    --secondary-color: #2c3e50;
+    --success-color: #27ae60;
+    --danger-color: #ff0000;
+    --warning-color: #f39c12;
+    --light-bg: #ecf0f1;
+    --dark-text: #2c3e50;
+    --light-text: #7f8c8d;
+    --border-color: #bdc3c7;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--light-bg); /* Gaišs fons lapai */
+    background: #2e3d64; 
     min-height: 100vh;
     color: var(--dark-text);
     line-height: 1.6;
 }
 
 .container {
-    max-width: 900px; /* Samazināts platums QUIZ lapai */
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
 /* Header */
 header {
-    background: #ffffff; /* Cieti balts fons */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: var(--shadow);
     padding: 1rem 0;
     margin-bottom: 2rem;
 }
@@ -52,7 +51,7 @@ header {
 }
 
 .logo h1 {
-    color: var(--primary-color); /* Krāsa nomainīta uz primāro */
+    color: black;
     font-size: 1.8rem;
 }
 
@@ -64,7 +63,7 @@ nav ul {
 
 nav a {
     text-decoration: none;
-    color: var(--secondary-color); /* Atjaunināts uz secondary-color */
+    color: var(--dark-text);
     font-weight: 500;
     transition: color 0.3s;
 }
@@ -76,31 +75,24 @@ nav a:hover {
 /* Cards */
 .card {
     background: white;
-    border-radius: 12px; /* Lielāks rādiuss */
-    padding: 2.5rem; /* Vairāk polsterējuma */
+    border-radius: 10px;
+    padding: 2rem;
     box-shadow: var(--shadow);
     margin-bottom: 2rem;
 }
 
 .card-header {
-    border-bottom: 1px solid var(--border-color); /* Plānāka līnija */
+    border-bottom: 2px solid var(--light-bg);
     padding-bottom: 1rem;
     margin-bottom: 1.5rem;
-    text-align: center; /* Centrs virsrakstiem */
 }
 
 .card-header h2 {
-    color: var(--primary-color); /* Virsraksts primārajā krāsā */
-    font-size: 2rem; /* Lielāks virsraksts */
-    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+    font-size: 1.8rem;
 }
 
-.card-header p {
-    color: var(--light-text);
-    font-style: italic;
-}
-
-/* Forms (Paliek gandrīz nemainīgs) */
+/* Forms */
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -135,17 +127,15 @@ nav a:hover {
 /* Buttons */
 .btn {
     display: inline-block;
-    padding: 0.75rem 1.75rem; /* Nedaudz lielāks polsterējums */
+    padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 5px;
     font-size: 1rem;
-    font-weight: 600; /* Biezāks fonts */
+    font-weight: 500;
     cursor: pointer;
     text-decoration: none;
     transition: all 0.3s;
     text-align: center;
-    text-transform: uppercase; /* Lielie burti */
-    letter-spacing: 0.5px;
 }
 
 .btn-primary {
@@ -154,9 +144,9 @@ nav a:hover {
 }
 
 .btn-primary:hover {
-    background: #0056b3; /* Tumšāks zilais */
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    background: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
 }
 
 .btn-success {
@@ -165,7 +155,7 @@ nav a:hover {
 }
 
 .btn-success:hover {
-    background: #1e7e34;
+    background: #229954;
 }
 
 .btn-danger {
@@ -179,12 +169,11 @@ nav a:hover {
 
 .btn-warning {
     background: var(--warning-color);
-    color: var(--dark-text);
+    color: white;
 }
 
 .btn-warning:hover {
     background: #e67e22;
-    color: white;
 }
 
 .btn-secondary {
@@ -193,9 +182,7 @@ nav a:hover {
 }
 
 .btn-secondary:hover {
-    background: #343a40;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(73, 80, 87, 0.3);
+    background: #1a252f;
 }
 
 .btn-block {
@@ -208,14 +195,7 @@ nav a:hover {
     font-size: 0.875rem;
 }
 
-.btn[disabled] {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-/* Alerts (Paliek nemainīgs) */
+/* Alerts */
 .alert {
     padding: 1rem;
     border-radius: 5px;
@@ -246,7 +226,7 @@ nav a:hover {
     border: 1px solid #bee5eb;
 }
 
-/* Quiz Grid (Paliek nemainīgs) */
+/* Quiz Grid */
 .quiz-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -286,169 +266,91 @@ nav a:hover {
     margin-bottom: 1rem;
 }
 
-/* Progress Bar (UZLABOTS) */
+/* Progress Bar */
 .progress-container {
-    margin-bottom: 2.5rem;
-    padding: 0 1rem;
+    margin-bottom: 2rem;
 }
 
 .progress-info {
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.5rem;
-    font-weight: 600; /* Biezāks fonts */
-    color: var(--secondary-color);
+    font-weight: 500;
 }
 
 .progress-bar-container {
     width: 100%;
-    height: 10px; /* Plānāks */
-    background: var(--border-color);
-    border-radius: 5px; /* Mazāks rādiuss */
+    height: 30px;
+    background: var(--light-bg);
+    border-radius: 15px;
     overflow: hidden;
     position: relative;
 }
 
 .progress-bar {
     height: 100%;
-    background: var(--primary-color); /* Vienkāršs, ciets fons */
+    background: linear-gradient(90deg, var(--primary-color), var(--success-color));
     transition: width 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: 500;
-    font-size: 0.8rem;
-    padding-right: 5px;
 }
 
-/* Question Container (UZLABOTS) */
+/* Question Container */
 .question-container {
-    /* Noņemam atsevišķu box shadow, jo tas ir card iekšpusē */
-    /* background: white; - Noņemts, jo card jau ir balts */
-    /* border-radius: 10px; - Noņemts */
-    padding: 0; /* Noņemam lieko padding */
-    box-shadow: none; /* Noņemam lieko ēnu */
-    margin-bottom: 0;
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
 }
 
 .question-text {
-    font-size: 1.5rem; /* Lielāks fonts */
-    font-weight: 600;
-    color: var(--dark-text);
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.question-text strong {
-    display: block;
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--light-text);
-    margin-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
 }
 
 .answers-list {
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
 }
 
 .answer-option {
     background: var(--light-bg);
-    padding: 1.25rem 1.5rem; /* Vairāk polsterējuma */
-    margin-bottom: 0; /* Noņemam lieko margin */
-    border-radius: 8px; /* Lielāks rādiuss */
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    border: 2px solid var(--border-color);
-    display: flex;
-    align-items: center;
-    position: relative;
+    transition: all 0.3s;
+    border: 2px solid transparent;
 }
 
 .answer-option:hover {
-    background: #e9ecef; /* Gaišāks hover fons */
-    border-color: var(--primary-color);
-    transform: none; /* Noņemam pārbīdīšanu pa X asi */
+    background: #d5dbdb;
+    transform: translateX(5px);
 }
 
-/* Custom Radio Poga (CSS Pielāgojumi) */
 .answer-option input[type="radio"] {
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    margin-right: 0; /* Noņemam sākotnējo margin */
-}
-
-.answer-option label {
-    flex-grow: 1; 
-    cursor: pointer;
-    font-size: 1.1rem;
-    padding-left: 2.5rem; /* Vieta custom radio pogai */
-    position: relative;
-}
-
-.answer-option label::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--secondary-color);
-    border-radius: 50%;
-    background: white;
-    transition: all 0.2s;
-}
-
-.answer-option.selected label::after {
-    content: '';
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px;
-    height: 10px;
-    background: var(--primary-color);
-    border-radius: 50%;
+    margin-right: 1rem;
 }
 
 .answer-option.selected {
-    background: #e2f0ff; /* Gaišāks fons atlasei */
-    border-color: var(--primary-color);
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+    background: #d4edda;
+    border-color: var(--success-color);
 }
 
-.answer-option.selected label::before {
-    border-color: var(--primary-color);
-}
-
-/* Navigation Buttons (UZLABOTS) */
+/* Navigation Buttons */
 .quiz-navigation {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    margin-top: 2.5rem; /* Vairāk vietas */
+    margin-top: 2rem;
 }
 
-.quiz-navigation .btn {
-    flex-grow: 1;
-    max-width: 200px; /* Ierobežots platums nav-pogām */
-}
-
-.quiz-navigation #submit-btn {
-    max-width: 300px; /* Lielāka Pabeigt poga */
-}
-
-/* Results (Paliek nemainīgs) */
+/* Results */
 .result-container {
     text-align: center;
     padding: 2rem;
@@ -479,7 +381,7 @@ nav a:hover {
     margin: 0.5rem 0;
 }
 
-/* Table (Paliek nemainīgs) */
+/* Table */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -508,7 +410,7 @@ nav a:hover {
     gap: 0.5rem;
 }
 
-/* Badge (Paliek nemainīgs) */
+/* Badge */
 .badge {
     display: inline-block;
     padding: 0.25rem 0.75rem;
@@ -527,7 +429,7 @@ nav a:hover {
     color: var(--dark-text);
 }
 
-/* History (Paliek nemainīgs) */
+/* History */
 .history-item {
     background: white;
     padding: 1.5rem;
@@ -563,7 +465,7 @@ nav a:hover {
     color: var(--light-text);
 }
 
-/* Login/Register Page (Paliek nemainīgs) */
+/* Login/Register Page */
 .auth-container {
     display: flex;
     justify-content: center;
@@ -611,7 +513,7 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* Dashboard Stats (Paliek nemainīgs) */
+/* Dashboard Stats */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -639,7 +541,7 @@ nav a:hover {
     font-size: 1rem;
 }
 
-/* Modal (Paliek nemainīgs) */
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -684,7 +586,7 @@ nav a:hover {
     color: var(--dark-text);
 }
 
-/* Responsive Design (UZLABOTS) */
+/* Responsive Design */
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
@@ -703,11 +605,6 @@ nav a:hover {
 
     .quiz-navigation {
         flex-direction: column;
-        align-items: center; /* Centrs pogām mobilajā */
-    }
-
-    .quiz-navigation .btn {
-        max-width: 100%;
     }
 
     .history-item {
@@ -748,7 +645,7 @@ nav a:hover {
     }
 }
 
-/* Loading Spinner (Paliek nemainīgs) */
+/* Loading Spinner */
 .spinner {
     border: 4px solid var(--light-bg);
     border-top: 4px solid var(--primary-color);
@@ -764,7 +661,7 @@ nav a:hover {
     100% { transform: rotate(360deg); }
 }
 
-/* Empty State (Paliek nemainīgs) */
+/* Empty State */
 .empty-state {
     text-align: center;
     padding: 3rem;
@@ -781,7 +678,7 @@ nav a:hover {
     margin-bottom: 0.5rem;
 }
 
-/* Utility Classes (Paliek nemainīgs) */
+/* Utility Classes */
 .text-center {
     text-align: center;
 }

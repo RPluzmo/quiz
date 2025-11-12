@@ -426,5 +426,131 @@ class Quiz {
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function saveResultDetails($result_id, $details) {
+        $query = "INSERT INTO result_details 
+                    (result_id, question_id, user_answer_text, correct_answer_text, is_correct) 
+                    VALUES (:result_id, :question_id, :user_answer_text, :correct_answer_text, :is_correct)";
+
+        $stmt = $this->conn->prepare($query);
+
+        foreach ($details as $item) {
+            $stmt->bindParam(':result_id', $result_id);
+            $stmt->bindParam(':question_id', $item['question_id']);
+            $stmt->bindParam(':user_answer_text', $item['user_answer']);
+            $stmt->bindParam(':correct_answer_text', $item['correct_answer']);
+            $stmt->bindParam(':is_correct', $item['is_correct']);
+            
+            if (!$stmt->execute()) {
+                // Kļūdas gadījumā, pārtraucam saglabāšanu
+                return false; 
+            }
+        }
+        return true;
+    }
+
+public function getHighScoresForAllUsers($quiz_id = 'all') {
+        
+        $where_clause = "";
+        if ($quiz_id !== 'all' && is_numeric($quiz_id)) {
+            $where_clause = " WHERE h.quiz_id = :quiz_id ";
+        }
+
+        // Tiek izmantots "Greatest N Per Group" modelis, lai atrastu MAX rezultātu katram user_id/quiz_id pārim.
+        $query = "
+            SELECT 
+                u.username,
+                q.name AS quiz_name,
+                q.description,
+                h.quiz_id,
+                h.score,
+                h.total_questions,
+                h.completed_at
+            FROM 
+                results h
+            INNER JOIN 
+                users u ON h.user_id = u.id
+            INNER JOIN 
+                quizzes q ON h.quiz_id = q.id
+            INNER JOIN (
+                SELECT 
+                    user_id, 
+                    quiz_id, 
+                    MAX(CAST(score AS DECIMAL) / total_questions) AS max_percentage
+                FROM 
+                    results
+                GROUP BY 
+                    user_id, quiz_id
+            ) AS best_scores ON h.user_id = best_scores.user_id 
+                               AND h.quiz_id = best_scores.quiz_id
+                               -- KRITISKĀ IZMAIŅA: Nodrošina, ka tiek atlasīta rinda ar faktisko MAX procentu
+                               AND (CAST(h.score AS DECIMAL) / h.total_questions) = best_scores.max_percentage
+            " . $where_clause . "
+            ORDER BY 
+                (CAST(h.score AS DECIMAL) / h.total_questions) DESC, 
+                h.completed_at ASC
+        ";
+
+        $stmt = $this->conn->prepare($query);
+
+        if ($quiz_id !== 'all' && is_numeric($quiz_id)) {
+            $stmt->bindParam(':quiz_id', $quiz_id, PDO::PARAM_INT);
+        }
+
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get quiz result details for review (from DB)
+     */
+    public function getResultDetailsForReview($result_id, $user_id) {
+        // 1. Ielādējam galveno rezultātu un pārbaudām lietotāja ID
+        $query_main = "SELECT r.*, q.name as quiz_name, q.description
+                       FROM " . $this->results_table . " r
+                       JOIN " . $this->quizzes_table . " q ON r.quiz_id = q.id
+                       WHERE r.id = :result_id AND r.user_id = :user_id LIMIT 1";
+        
+        $stmt_main = $this->conn->prepare($query_main);
+        $stmt_main->bindParam(':result_id', $result_id);
+        $stmt_main->bindParam(':user_id', $user_id);
+        $stmt_main->execute();
+        $main_result = $stmt_main->fetch(PDO::FETCH_ASSOC);
+
+        if (!$main_result) {
+            return false; // Rezultāts nav atrasts vai pieder citam lietotājam
+        }
+
+        // 2. Ielādējam detalizēto informāciju
+        $query_details = "SELECT rd.user_answer_text, rd.correct_answer_text, rd.is_correct, q.question_text
+                          FROM result_details rd
+                          JOIN questions q ON rd.question_id = q.id
+                          WHERE rd.result_id = :result_id
+                          ORDER BY rd.id ASC";
+
+        $stmt_details = $this->conn->prepare($query_details);
+        $stmt_details->bindParam(':result_id', $result_id);
+        $stmt_details->execute();
+        $details = $stmt_details->fetchAll(PDO::FETCH_ASSOC);
+
+        // Pārformatējam datus, lai tie atbilstu sesijas struktūrai
+        $formatted_details = array_map(function($item) {
+            return [
+                'question' => $item['question_text'],
+                'user_answer' => $item['user_answer_text'] ?? 'Nav atbildēts', // Iespējams NULL
+                'correct_answer' => $item['correct_answer_text'],
+                'is_correct' => (bool)$item['is_correct']
+            ];
+        }, $details);
+
+        return [
+            'quiz_name' => $main_result['quiz_name'],
+            'score' => $main_result['score'],
+            'total' => $main_result['total_questions'],
+            'completed_at' => $main_result['completed_at'],
+            'details' => $formatted_details
+        ];
+    }
+
 }
 ?>

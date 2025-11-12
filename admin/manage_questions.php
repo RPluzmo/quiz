@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message_type = $result['success'] ? 'success' : 'danger';
 
         // ✅ Redirect – novērš dublikātus pēc refreša
-        header("Location: manage_quizzes.php?quiz_id={$quiz_id}&msg=" . urlencode($message) . "&type={$message_type}");
+        header("Location: manage_questions.php?quiz_id={$quiz_id}&msg=" . urlencode($message) . "&type={$message_type}");
         exit;
     }
 
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message_type = $result['success'] ? 'success' : 'danger';
 
         // ✅ Redirect – arī pēc dzēšanas
-        header("Location: manage_quizzes.php?quiz_id={$quiz_id}&msg=" . urlencode($message) . "&type={$message_type}");
+        header("Location: manage_questions.php?quiz_id={$quiz_id}&msg=" . urlencode($message) . "&type={$message_type}");
         exit;
     }
 }
