@@ -83,7 +83,7 @@ foreach ($questions as &$question) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($quiz['name']); ?> Tests</title>
     <link rel="stylesheet" href="assets/css/style.css">
-</head>
+    </head>
 <body>
 <header>
     <div class="header-content">
@@ -110,28 +110,30 @@ foreach ($questions as &$question) {
             <p><?php echo htmlspecialchars($quiz['description']); ?></p>
         </div>
 
-        <!-- Progress Bar -->
         <div class="progress-container">
             <div class="progress-info">
-                <span id="progress-text">1. jautājums no <?php echo count($questions); ?></span>
-                <span>Kopā: <?php echo count($questions); ?></span>
+                <span id="progress-text">1. jautājums no <?php echo count($questions); ?></span> 
+                <span class="text-right">Kopā: <?php echo count($questions); ?> jaut.</span>
             </div>
             <div class="progress-bar-container">
                 <div id="progress-bar" class="progress-bar" style="width: <?php echo (1 / count($questions)) * 100; ?>%">
-                    <?php echo round((1 / count($questions)) * 100); ?>%
                 </div>
             </div>
         </div>
 
-        <!-- Question Container -->
         <form id="quiz-form" method="POST" action="">
             <div class="question-container" id="question-container"></div>
 
-            <!-- Navigation Buttons -->
             <div class="quiz-navigation">
-                <button type="button" id="prev-btn" class="btn btn-secondary" disabled><- Iepriekšējais</button>
-                <button type="button" id="next-btn" class="btn btn-primary" disabled>Nākamais -></button>
-                <button type="button" id="submit-btn" class="btn btn-success" style="display:none;" disabled>Pabeigt testu</button>
+                <button type="button" id="prev-btn" class="btn btn-secondary" disabled>
+                    <- Iepriekšējais
+                </button>
+                <button type="button" id="next-btn" class="btn btn-primary" disabled>
+                    Nākamais ->
+                </button>
+                <button type="button" id="submit-btn" class="btn btn-success" style="display:none;" disabled>
+                    Pabeigt testu
+                </button>
             </div>
         </form>
     </div>
@@ -152,6 +154,7 @@ foreach ($questions as &$question) {
         ];
     }, $questions)); ?>;
 
+    // Uzsākam QuizManager ar datiem no PHP
     quizManager.init(questionsData);
 </script>
 </body>

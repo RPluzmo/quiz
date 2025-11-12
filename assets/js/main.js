@@ -1,3 +1,5 @@
+// main.js - UZLABOTA VERSIJA
+
 class QuizManager {
   constructor() {
     this.current = 0;
@@ -21,17 +23,17 @@ class QuizManager {
     let html = `
       <div class="question-text">
         <strong>${this.current + 1}. jautājums no ${this.questions.length}</strong>
-        <p>${q.text}</p>
+        ${q.text}
       </div>
       <ul class="answers-list">
         ${q.answers
           .map(
             (a) => `
           <li class="answer-option ${this.answers[q.id] === a.id ? "selected" : ""}" data-qid="${q.id}" data-aid="${a.id}">
-            <input type="radio" name="answer-${q.id}" value="${a.id}" ${
+            <input type="radio" name="answer-${q.id}" value="${a.id}" id="ans-${a.id}" ${
               this.answers[q.id] === a.id ? "checked" : ""
             }>
-            <label>${a.text}</label>
+            <label for="ans-${a.id}">${a.text}</label>
           </li>
         `
           )
@@ -46,10 +48,15 @@ class QuizManager {
     this.answers[qid] = aid;
     // highlight selected
     document.querySelectorAll(".answer-option").forEach((opt) => {
+      // Pārliecināmies, ka atlasām tikai pašreizējo jautājumu
       if (parseInt(opt.dataset.qid) === qid) {
-        opt.classList.toggle("selected", parseInt(opt.dataset.aid) === aid);
+        // Toggle selected klasi
+        const isSelected = parseInt(opt.dataset.aid) === aid;
+        opt.classList.toggle("selected", isSelected);
+        
+        // Pārliecināmies, ka radio poga ir atzīmēta (lai gan CSS to slēpj, tas ir vajadzīgs funkcionalitātei)
         const radio = opt.querySelector('input[type="radio"]');
-        if (radio) radio.checked = parseInt(opt.dataset.aid) === aid;
+        if (radio) radio.checked = isSelected;
       }
     });
     this.updateNavButtons();
@@ -59,10 +66,16 @@ class QuizManager {
     const bar = document.getElementById("progress-bar");
     const txt = document.getElementById("progress-text");
     if (!bar || !txt) return;
-    const percent = ((this.current + 1) / this.questions.length) * 100;
+    
+    const totalQuestions = this.questions.length;
+    const currentStep = this.current + 1;
+    const percent = (currentStep / totalQuestions) * 100;
+    
     bar.style.width = percent + "%";
-    bar.textContent = Math.round(percent) + "%";
-    txt.textContent = `Question ${this.current + 1} of ${this.questions.length}`;
+    // *** LABOJUMS: Noņemam tekstu no plānās joslas (bar.textContent) ***
+    // bar.textContent = Math.round(percent) + "%"; 
+    
+    txt.textContent = `${currentStep}. jautājums no ${totalQuestions}`;
   }
 
   updateNavButtons() {
@@ -75,8 +88,11 @@ class QuizManager {
     if (prev) prev.disabled = this.current === 0;
     if (next && submit) {
       const last = this.current === this.questions.length - 1;
+      // Toggle button display based on whether it's the last question
       next.style.display = last ? "none" : "inline-block";
       submit.style.display = last ? "inline-block" : "none";
+      
+      // Buttons are only enabled if an answer is selected
       next.disabled = !answered;
       submit.disabled = !answered;
     }
@@ -108,17 +124,18 @@ class QuizManager {
 
     if (answered < total) {
       const proceed = confirm(
-        `Jūs nēsat atbildējis uz ${total - answered} jautājumiem.. Vai iesniegt?`
+        `Jūs nēsat atbildējis uz ${total - answered} jautājumiem. Vai tiešām iesniegt?`
       );
       if (!proceed) return;
     }
 
+    // Pievienojam slēptu ievades lauku ar atbilžu JSON
     const input = document.createElement("input");
     input.type = "hidden";
     input.name = "answers";
     input.value = JSON.stringify(this.answers);
     form.appendChild(input);
-    form.submit(); // normal PHP post
+    form.submit();
   }
 }
 
@@ -126,7 +143,6 @@ const quizManager = new QuizManager();
 
 // ---------- PAGE INITIALIZATION ----------
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("jankas skripts itkaa straadaa");
 
   // QUIZ card click → open quiz
   document.querySelectorAll(".quiz-card").forEach((card) => {
@@ -140,7 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const qContainer = document.getElementById("question-container");
   if (qContainer) {
     qContainer.addEventListener("click", (e) => {
-      const li = e.target.closest(".answer-option");
+      // Atlasīt augstāko "answer-option" elementu, lai klikšķis strādātu jebkurā vietā
+      const li = e.target.closest(".answer-option"); 
       if (li) {
         const qid = parseInt(li.dataset.qid);
         const aid = parseInt(li.dataset.aid);
@@ -148,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+  
   const prev = document.getElementById("prev-btn");
   const next = document.getElementById("next-btn");
   const submit = document.getElementById("submit-btn");
@@ -162,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "ArrowRight") quizManager.next();
   });
 
-  // PASSWORD STRENGTH CHECKER
+  // PASSWORD STRENGTH CHECKER (Pārējās funkcijas paliek nemainīgas, ja tās nav saistītas ar quiz UI)
   const pw = document.getElementById("password");
   const feedback = document.getElementById("password-feedback");
   if (pw && feedback) {
@@ -176,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!/[^A-Za-z0-9]/.test(val)) errors.push("vismaz 1 simbols");
       if (errors.length)
         feedback.innerHTML =
-          "<ul style='color:#e74c3c'>" +
+          "<ul style='color:#e74c3c; list-style-type: none; padding-left: 0;'>" + // Uzlabots stils kļūdām
           errors.map((e) => `<li>${e}</li>`).join("") +
           "</ul>";
       else
