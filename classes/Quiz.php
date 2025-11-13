@@ -450,45 +450,34 @@ class Quiz {
 
 public function getHighScoresForAllUsers($quiz_id = 'all') {
         
-        $where_clause = "";
-        if ($quiz_id !== 'all' && is_numeric($quiz_id)) {
-            $where_clause = " WHERE h.quiz_id = :quiz_id ";
-        }
+    $where_clause = "";
+    if ($quiz_id !== 'all' && is_numeric($quiz_id)) {
+        // Pievieno WHERE nosacījumu galvenajam vaicājumam
+        $where_clause = " WHERE r.quiz_id = :quiz_id ";
+    }
 
-        // Tiek izmantots "Greatest N Per Group" modelis, lai atrastu MAX rezultātu katram user_id/quiz_id pārim.
-        $query = "
-            SELECT 
-                u.username,
-                q.name AS quiz_name,
-                q.description,
-                h.quiz_id,
-                h.score,
-                h.total_questions,
-                h.completed_at
-            FROM 
-                results h
-            INNER JOIN 
-                users u ON h.user_id = u.id
-            INNER JOIN 
-                quizzes q ON h.quiz_id = q.id
-            INNER JOIN (
-                SELECT 
-                    user_id, 
-                    quiz_id, 
-                    MAX(CAST(score AS DECIMAL) / total_questions) AS max_percentage
-                FROM 
-                    results
-                GROUP BY 
-                    user_id, quiz_id
-            ) AS best_scores ON h.user_id = best_scores.user_id 
-                               AND h.quiz_id = best_scores.quiz_id
-                               -- KRITISKĀ IZMAIŅA: Nodrošina, ka tiek atlasīta rinda ar faktisko MAX procentu
-                               AND (CAST(h.score AS DECIMAL) / h.total_questions) = best_scores.max_percentage
-            " . $where_clause . "
-            ORDER BY 
-                (CAST(h.score AS DECIMAL) / h.total_questions) DESC, 
-                h.completed_at ASC
-        ";
+    // Pārveidotais vaicājums, kas atgriež visus ierakstus, nevis tikai maksimālos rezultātus.
+    $query = "
+        SELECT 
+            u.username,
+            q.name AS quiz_name,
+            q.description,
+            r.quiz_id,
+            r.score,
+            r.total_questions,
+            r.completed_at
+        FROM 
+            " . $this->results_table . " r
+        INNER JOIN 
+            users u ON r.user_id = u.id
+        INNER JOIN 
+            " . $this->quizzes_table . " q ON r.quiz_id = q.id
+        " . $where_clause . "
+        ORDER BY 
+            -- Sakārto pēc rezultāta procentuālās daļas (score / total_questions)
+            (CAST(r.score AS DECIMAL) / r.total_questions) DESC, 
+            r.completed_at ASC
+    ";
 
         $stmt = $this->conn->prepare($query);
 
